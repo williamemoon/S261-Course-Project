@@ -21,6 +21,8 @@ def tax_ammount(taxrate, payrate, hours):
     return taxrate * hours * payrate
 
 next_employee = " "
+count = 0
+
 while (next_employee.lower() != "end"):
     
     #main
@@ -33,12 +35,9 @@ while (next_employee.lower() != "end"):
         print ("Gross Pay:       $",grosspay(hours, payrate))
         print ("Taxes Withheld:  $",tax_ammount(taxrate, payrate, hours))
         print ("Net Pay:         $",netpay(taxrate, payrate, hours))
-            
+        count = count +1 
+        
     next_employee = input ("Would you like to enter another employee?  To end type \"end\":   ")
-    
-    count = 1
 
-    if next_employee != "end": 
-        count += 1        
-    else: 
-         print ("employee count = ", count)
+    print ("employee count = ", count)
+   
