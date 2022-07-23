@@ -1,12 +1,13 @@
  
 #function input employee information
 def employee_info():
-    employee_name = input("Enter the employee's name :   ")
+    employeename = input("Enter the employee's name :   ")
     hours = float(input ("Enter the number of hours worked:  "))
     payrate = float(input("Enter the employee's payrate in dollars per hour:  "))
     taxrate = float(input ("Enter the income tax rate for this employee:  "))
-   
-    return employee_name,  hours, payrate, taxrate
+    print (" ")
+
+    return employeename,  hours, payrate, taxrate
 
 #function gross pay
 def grosspay(hours, payrate):
@@ -20,24 +21,40 @@ def netpay(taxrate, payrate, hours):
 def tax_ammount(taxrate, payrate, hours):
     return taxrate * hours * payrate
 
-next_employee = " "
+nextemployee = " "
 count = 0
+totalhours = 0
+totalgrosspay = 0
+totalincometax = 0
+totalnetpay = 0
 
-while (next_employee.lower() != "end"):
+
+while (nextemployee.lower() != "end"):
     
     #main
     if __name__ == "__main__":
-        employee_name, hours, payrate, taxrate  = employee_info()
-        print ("Name:             ", employee_name)
+        employeename, hours, payrate, taxrate  = employee_info()
+        print ("Name:             ", employeename)
         print ("Hours Worked:     ", hours, "Hours")
         print ("Payrate:         $", payrate, "per Hour")
-        print ("Income Tax Rate:  ", taxrate, "%")
-        print ("Gross Pay:       $",grosspay(hours, payrate))
-        print ("Taxes Withheld:  $",tax_ammount(taxrate, payrate, hours))
-        print ("Net Pay:         $",netpay(taxrate, payrate, hours))
-        count = count +1 
+        print ("Income Tax Rate:  ",round(taxrate, 2), "%")
+        print ("Gross Pay:       $",round(grosspay(hours, payrate), 2))
+        print ("Taxes Withheld:  $",round(tax_ammount(taxrate, payrate, hours), 2))
+        print ("Net Pay:         $",round(netpay(taxrate, payrate, hours), 2))
         
-    next_employee = input ("Would you like to enter another employee?  To end type \"end\":   ")
+        count = count +1         
+        totalhours = hours + totalhours
+        totalgrosspay = grosspay(hours, payrate) + totalgrosspay
+        totalincometax = tax_ammount(taxrate, payrate, hours) + totalincometax
+        totalnetpay = netpay(taxrate, payrate, hours) + totalnetpay
+    
+    print (" ")
+    nextemployee = input ("Would you like to enter another employee?  To end type \"end\":   ")
+    print (" ")
 
-    print ("employee count = ", count)
-   
+print (" ")
+print ("Total Number of employees: ", count)
+print ("Total Hours Worked: ", round(totalhours, 2))
+print ("Total Gross Pay: ", round(totalgrosspay, 2)) 
+print ("Total Income Tax: ", round(totalincometax, 2))
+print ("Total Net Pay: ", round(totalnetpay, 2)) 
