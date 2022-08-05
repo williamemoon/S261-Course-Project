@@ -1,11 +1,11 @@
+def getemployee_name():
+    employee_name = input("Enter the employee's name :   ")
+    return employee_name
+
 def date_input():
     start_date = input("Enter the start date (MM/DD/YYYY):  ")
     end_date = input("Enter the end date (MM/DD/YYYY):   ")
     return start_date, end_date
-
-def getemployee_name():
-    employee_name = input("Enter the employee's name :   ")
-    return employee_name
 
 def getemployee_hours():
     employee_hours = float(input ("Enter the number of hours worked:  "))
@@ -53,29 +53,29 @@ def print_details(pay_detaillist):
 
 def printcompany_totals(company_totals):
     print (" ")
-    print (f"Total Number of Employees: {company_totals[count]}")
-    print (f"Total Hours Worked:  {company_totals[totalhours]:,.2f}")
-    print (f"Total Gross Pay: {company_totals[totalgrosspay]:,.2f}")
-    print (f"Total Income Tax: {company_totals[totalincometax]:,.2f}")
-    print (f"Total Net Pay: {company_totals[totalnetpay]:,.2f}")
+    print (f'Total Number of Employees: {company_totals["count"]}')
+    print (f'Total Hours Worked:  {company_totals["totalhours"]:,.2f}')
+    print (f'Total Gross Pay: {company_totals["totalgrosspay"]:,.2f}')
+    print (f'Total Income Tax: {company_totals["totalincometax"]:,.2f}')
+    print (f'Total Net Pay: {company_totals["totalnetpay"]:,.2f}')
     
 
 if __name__ == "__main__":
     pay_detailslist = []
     company_totals = []
     while True:
-        employee_name = employee_name
-        if (employee_name.upper() == "END"):
+        employee_name = getemployee_name()
+        if (employee_name == "end"):
             break
-        start_date, end_date = date_input
-        employee_hours = getemployee_hours
-        employee_payrate = getemployee_payrate
-        employee_taxrate = getemployee_taxrate
+        start_date, end_date = date_input()
+        employee_hours = getemployee_hours()
+        employee_payrate = getemployee_payrate()
+        employee_taxrate = getemployee_taxrate()
         paydetails = [start_date, end_date, employee_name, employee_hours, employee_payrate, employee_taxrate]
         pay_detailslist.append(paydetails)
 
     print_details(pay_detailslist)
     printcompany_totals(company_totals)
 
-    #36.16 in recording
+
 
