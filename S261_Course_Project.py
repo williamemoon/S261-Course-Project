@@ -1,3 +1,9 @@
+#function to input from-to date
+def date_input():
+    start_date = input("Enter the start date (MM/DD/YYYY):  ")
+    end_date = input("Enter the end date (MM/DD/YYYY):   ")
+
+    return start_date, end_date
  
 #function input employee information
 def employee_info():
@@ -31,9 +37,14 @@ totalnetpay = 0
 
 while (nextemployee.lower() != "end"):
     
+    
     #main
     if __name__ == "__main__":
+        start_date, end_date = date_input()
         employeename, hours, payrate, taxrate  = employee_info()
+
+        print ("Start Date:  ", start_date)
+        print("End Date:  ", end_date)
         print ("Name:             ", employeename)
         print ("Hours Worked:     ", hours, "Hours")
         print ("Payrate:         $", payrate, "per Hour")
