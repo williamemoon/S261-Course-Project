@@ -19,14 +19,14 @@ def getemployee_taxrate():
     employee_taxrate = float(input ("Enter the income tax rate for this employee:  "))
     return employee_taxrate
 
-def get_net_gross_tax():
-    grosspay = employee_hours * employee_taxrate
-    netpay = grosspay * employee_payrate
+def get_net_gross_tax(employee_hours, employee_taxrate, employee_payrate):
+    grosspay = employee_hours * employee_payrate
     tax_ammount = grosspay * employee_taxrate
+    netpay = grosspay - tax_ammount
     return grosspay, netpay, tax_ammount
 
 def print_details(pay_detaillist):
-    count = 0
+    count_emp = 0
     totalhours = 0.00
     totalgrosspay = 0.00
     totalincometax = 0.00
@@ -38,14 +38,17 @@ def print_details(pay_detaillist):
         employee_hours = pay_details[3]
         employee_payrate = pay_details[4]
         employee_taxrate = pay_details[5]
-        grosspay, tax_ammount, netpay = get_net_gross_tax (employee_hours, employee_taxrate, employee_payrate)
+        
+        grosspay, tax_ammount, netpay = get_net_gross_tax(employee_hours, employee_taxrate, employee_payrate)
         print (start_date, end_date, employee_name, f"{employee_hours:,.2f}", f"{employee_payrate:,.2f}", f"{grosspay:,.2f}", f"{employee_taxrate:,.1%}", f"{tax_ammount:,.2f}", f"{netpay:,.2f}")
-        count +=1
+        
+        count_emp += 1
         totalhours += employee_hours
         totalgrosspay += grosspay
         totalincometax += tax_ammount
         totalnetpay += netpay
-        company_totals["count"] = count
+        
+        company_totals["employee_count"] = count_emp
         company_totals["totalhours"] = totalhours
         company_totals["totalgrosspay"] = totalgrosspay
         company_totals["totalincometax"] = totalincometax
@@ -53,16 +56,16 @@ def print_details(pay_detaillist):
 
 def printcompany_totals(company_totals):
     print (" ")
-    print (f'Total Number of Employees: {company_totals["count"]}')
-    print (f'Total Hours Worked:  {company_totals["totalhours"]:,.2f}')
-    print (f'Total Gross Pay: {company_totals["totalgrosspay"]:,.2f}')
-    print (f'Total Income Tax: {company_totals["totalincometax"]:,.2f}')
-    print (f'Total Net Pay: {company_totals["totalnetpay"]:,.2f}')
+    print (f'Total Number of Employees: {company_totals["employee_count"]}')
+    print (f'Total Hours Worked:        {company_totals["totalhours"]:,.2f}')
+    print (f'Total Gross Pay:           {company_totals["totalgrosspay"]:,.2f}')
+    print (f'Total Income Tax Withheld: {company_totals["totalincometax"]:,.2f}')
+    print (f'Total Net Pay:             {company_totals["toatlnetpay"]:,.2f}')
+      
     
-
 if __name__ == "__main__":
     pay_detailslist = []
-    company_totals = []
+    company_totals = {}
     while True:
         employee_name = getemployee_name()
         if (employee_name == "end"):
